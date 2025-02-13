@@ -1,16 +1,28 @@
-// http 모듈을 가져옵니다
-const http = require('http');
+var http = require("http");
+var fs = require("fs");
 
-// 서버를 생성합니다
-const server = http.createServer((req, res) => {
-    // 응답 헤더 설정 (200 OK, 콘텐츠 타입은 텍스트)
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
+http
+  .createServer(function (req, res) {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    fs.readFile("demofile1.html", function (err, data) {
+      res.write(data);
+      fs.readFile("demofile1.html", function (err, data) {
+        res.write(data);
+        res.end();
+      });
+    });
+  })
+  .listen(3000);
 
-    // 클라이언트에게 보낼 응답 데이터
-    res.end('Hello, Node.js Server!');
-});
+  var http = require("http");
+var fs = require("fs/promises");
 
-// 서버를 3000번 포트에서 실행합니다
-server.listen(3000, () => {
-    console.log('서버가 http://localhost:3000 에서 실행 중입니다.');
-});
+http.createServer(async function (req, res) {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    const data = await fs.readFile("demofile1.html");
+    res.write(data);
+    const data2 = await fs.readFile("demofile1.html");
+    res.write(data2);
+    res.end();
+  })
+  .listen(3000);
