@@ -26,8 +26,7 @@ const fs = require('fs');
 
   const downloadPath = './downloads/' + download.suggestedFilename();
   await download.saveAs(downloadPath);
-  console.log(`✅ 파일 다운로드 완료: ${downloadPath}`);
-
+  console.log(`downloaded path : ${downloadPath}`);
   await browser.close();
 })();
 
